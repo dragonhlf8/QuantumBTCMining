@@ -6,8 +6,10 @@ num_leading_zeros = 2
 prefix = '0'*num_leading_zeros
 
 '''
-    @fn - a function that returns a base10 value 
-    n - The number of bits in the input
+    @param fn - a function that returns a base10 value 
+    @param n - The number of bits in the input
+
+    @return a Unitary Matrix of size 2^n. With 1 or -1 on the diagonal. -1 marks successful nonces
 '''
 def function_to_matrix(fn, n):
     matrix = []
@@ -25,9 +27,12 @@ def function_to_matrix(fn, n):
     return matrix
 
 
-def mining_helper(x, n):
-    return (-1)**f(x, n)
-
+'''
+    @param x - Base 10 number. In the context of building the unitary matrix, is it the column number in base 10
+    @return (-1)^f(x)
+'''
+def phase(x):
+    return (-1)**f(x)
 
 '''
     @param x - A base 10 number. In the context of Unitary matrices, this is the column number in base 10
@@ -50,18 +55,6 @@ def input_fragment (qc, input_bits) :
         if val == '1' : qc.x((n-idx)-1)
     qc.barrier()
     
-
-'''
-    @param qc - A QuantumCircuit Object
-    @param input_buts A QuantumRegister of size n that contains the input nonce
-    @param n
-'''
-
-def BTC_mining_oracle(qc, input_bits, n):
-    input_fragment(qc, input_bits)
-    fn = lambda x, n : mining_helper(x, n)
-    M = function_to_matrix(fn, n)
-    qc.unitary(M, range(n))
     
     
         
