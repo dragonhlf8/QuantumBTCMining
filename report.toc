@@ -1,0 +1,23 @@
+\contentsline {section}{\numberline {1}Introduction}{2}%
+\contentsline {section}{\numberline {2}Blockchain}{2}%
+\contentsline {section}{\numberline {3}Currency and Cryptocurrencies}{3}%
+\contentsline {section}{\numberline {4}Bitcoin}{3}%
+\contentsline {subsection}{\numberline {4.1}Overview}{3}%
+\contentsline {subsection}{\numberline {4.2}Price Factors}{3}%
+\contentsline {subsection}{\numberline {4.3}Byzantine General's Problem and Consenus}{3}%
+\contentsline {subsection}{\numberline {4.4}The Bitcoin Network and distributed Nodes}{3}%
+\contentsline {subsection}{\numberline {4.5}Cryptography and security}{3}%
+\contentsline {subsection}{\numberline {4.6}Public Adoption}{3}%
+\contentsline {subsection}{\numberline {4.7}Environmental Impact}{3}%
+\contentsline {section}{\numberline {5}Proof-of-Work and Mining}{3}%
+\contentsline {subsection}{\numberline {5.1}A brief history of Proof of Work}{3}%
+\contentsline {subsection}{\numberline {5.2}Overview}{3}%
+\contentsline {subsection}{\numberline {5.3}Hashing and the search for a nonce}{3}%
+\contentsline {subsection}{\numberline {5.4}Mining Technology}{3}%
+\contentsline {section}{\numberline {6}Grover's Algorithm}{3}%
+\contentsline {section}{\numberline {7}An Oracle for mining Bitcoin Blocks}{3}%
+\contentsline {subsection}{\numberline {7.1}Functions as Unitary Matrices}{3}%
+\contentsline {subsection}{\numberline {7.2}Reversible Functions}{3}%
+\contentsline {subsection}{\numberline {7.3}Pseudocode}{3}%
+\contentsline {section}{\numberline {8}Full Mining Implementation}{3}%
+\contentsline {section}{\numberline {9}Implementation Analysis and Practical Considerations}{3}%
