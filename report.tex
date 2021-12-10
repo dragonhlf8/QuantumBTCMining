@@ -31,7 +31,10 @@
 \usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
 \usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
-\usepackage{pythontex}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\usepackage{listings}
+
 % These packages are all incorporated in the memoir class to one degree or another...
 
 %%% HEADERS & FOOTERS
@@ -152,15 +155,68 @@ There is one problem with the above matrix when trying to use it, it is not reve
 
 \noindent For example, a logical AND gate takes 2 inputs but produces only one output, we cannot recover the original bits, and so we lost or deleted information. This deleted information was released into the environment as heat. He proposed that the minimum amount of energy required to delete one bit of information was $K T$ ln (2), where K is the Boltzmann constant and T is the temperature of the system. It was derived from the Boltzmann Entropy Formula which states that $\frac{E}{T} = K ln(W)$ where $E$ is energy and $W$ is the number of states the system can be in. In the case of a bit, it can be in 2 states, 0 or 1 and so $W = 2$ and so we get $E = K T ln(2)$. For $N$ bits, we have $W = 2^{N}$ states which gives $E = K T ln(2^N)$ which is equivalent to $N K T ln (2)$ which shows that the energy dissipated by logic gates scales linearly with the number of bits.\\
 
-\noindent We can turn an arbitrary non reversible function $f(x)$ reversible by doing $U_{f} (x, h) = (x, h \oplus  f(x))$. In terms of a matrix representing a function, that can be achieved by doing $U_f |x> = (-1)^{f(x)}|x>$
+\noindent We can turn an arbitrary non reversible function $f(x)$ reversible by doing $U_{f} (x, h) = (x, h \oplus  f(x))$. \\
+
+\noindent In terms of a matrix representing a function, that can be achieved by doing $U_f |x> = (-1)^{f(x)}|x>$
+
+
  \subsection{Pseudocode}{}
-\begin{verbatim} 
+We can use the following Python pseudocode to achieve the above.
+\begin{Verbatim}[tabsize=4]
+def f(x):	
+	if f(x) is a solution:
+		return 1
+	return 0
 
-\end{verbatim} 
+def phase(x):
+	return (-1)**f(x)
 
-\section{Full Mining Implementation}{}
+def functionToMatrix(fn, n):
+	size = 2**n
+	matrix = []
+	for i in range(size):
+		for j in range(size):
+			if (j == i):
+				matrix[i][j] = fn(j)
+	return matrix
+	
+\end{Verbatim} 
+
+\section{Mining Implementation Overview}{}
+We have implemented the full mining solution with Grover's Algorithm and tested it on a simulator and it works correctly. We use the following test block and attempt to find a hash with 2 leading zeros.
+
+\begin{verbatim}
+block_header = {
+    nVersion: 0x1,
+    hashPrevBlock: 0x00000000839a8e6886ab5951d76f411475428afc90947ee320161bbf18eb6048,
+    hashMerkleRoot: 0x9b0fc92260312ce44e74ef369f5c66bbb85848f2eddd5a7a1cde251e54ccfdd5,
+    nTime: 1231467715,
+    nBits: 486604799
+}
+\end{verbatim}
+
+\noindent This block is real data from block number 2 of the Bitcoin blockchain obtained from \href{https://www.blockchain.com/btc/block/2}{here}. We omit the nNonce field as we are trying to search for it.\\
+
+\noindent For this block, the nonce 47 computes a hash with 2
+
+\noindent Running the following
+
+\begin{verbatim}
+python main.py 6 5
+\end{verbatim}
+
+Which means $n$ qubits are to be used and 5 iterations of Grover's Algorithm. We get the following results:
+
+\includegraphics[keepaspectratio, width=15cm, height=15cm]{plot}
+
+We can see that the probability of input 47 is 96.1\%, which is what we expect.
 
 \section{Implementation Analysis and Practical Considerations}{}
+The reason we are limited in the earlier section is because the amount of space required to store the Unitary matrix grows exponentially with the number of input bits. For $n$ bits, the space complexity is $O(2^{2n})$. This is because $n$ bits can be in $2^{n}$ states and our matrix must account for each one. \\
+
+\noindent To put this into perspective, even for $n = 20$ bits (which is only 7 digit base-10 number at most), we would need a matrix with a trillion rows and columns! This obviously will not scale. To further illustrate the impracticality of this, the most recently mined block (at the time of writing), block 713463 (found \href{https://www.blockchain.com/btc/block/713463}{here}) had a nonce of 148,510,277 which in binary, is 28 bits, so using our approach we'd need $2^{56}$ entries in our matrix!\\
+
+\noindent I haven't dug deeply into Qiskit internals but, it may be possible to encode only the values on the diagonal of the matrix and then pass it to Qiskit's \lstinline{g.unitary()}. This way, our space complexity would be $O(2^n)$ which is still quite large, but a significant improvement.
 
 
 
