@@ -183,8 +183,15 @@ def functionToMatrix(fn, n):
 \end{Verbatim} 
 
 \section{Mining Implementation Overview}{}
-We have implemented the full mining solution with Grover's Algorithm and tested it on a simulator and it works correctly. We use the following test block and attempt to find a hash with 2 leading zeros.
+We have implemented the full mining solution with Grover's Algorithm and tested it on a simulator and it works correctly. To run the program follow this format:
 
+\begin{verbatim}
+python main.py n i
+\end{verbatim}
+
+\noindent Where $n$ is the number of qubits to use and $i$ is the number of Grover iterations to use, more iterations means our target result is amplified more and has a higher probability. Note that we can't use any $n$ as a potential nonce may be larger than $n$ bits, hence we use the following test block and attempt to find a hash with 2 leading zeros and we know a nonce with 6  bits exist.\\
+
+\noindent Test block:
 \begin{verbatim}
 block_header = {
     nVersion: 0x1,
@@ -197,15 +204,15 @@ block_header = {
 
 \noindent This block is real data from block number 2 of the Bitcoin blockchain obtained from \href{https://www.blockchain.com/btc/block/2}{here}. We omit the nNonce field as we are trying to search for it.\\
 
-\noindent For this block, the nonce 47 computes a hash with 2
+\noindent For this block, the nonce 47 computes a hash with 2 leading zeros. I ran a seperate script to check this. We expect to find 47 as a solution when running our code.\\
 
-\noindent Running the following
+\noindent Running the following:
 
 \begin{verbatim}
 python main.py 6 5
 \end{verbatim}
 
-Which means $n$ qubits are to be used and 5 iterations of Grover's Algorithm. We get the following results:
+\noindent Which means $n = 6$ qubits are to be used and 5 iterations of Grover's Algorithm. We get the following results:
 
 \includegraphics[keepaspectratio, width=15cm, height=15cm]{plot}
 
