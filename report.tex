@@ -31,6 +31,7 @@
 \usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
 \usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage{pythontex}
 % These packages are all incorporated in the memoir class to one degree or another...
 
 %%% HEADERS & FOOTERS
@@ -80,16 +81,28 @@ A blockchain is simply a ledger. It records transactions. It records the sender,
 
 \noindent In ancient times, in places like Babylon and Mesopotamia, people used clay tablets and carved details of transactions onto these tablets. Slowly these evolved into papyrus documents. In the 15h century, italian mathematician Luca Pacioli introduced the idea of double entry bookkeeping. It became the underlying principle of today's field of accounting. It's very simple, each transaction involves a credit entry for one party and a debit entry for another party.\\
 
-\noindent Blockchain is essentially a modern versional of a ledger. It is digital but also \textbf{decentralized}. We'll discuss the concept of decentralization more in depth but, at a high level what it means is that nobody owns or controls the ledger. In ancient times, ledgers were stored in temples, then banks in more modern times. Instead, the blockchain is stored on various computers referred to as a 'network'.
+\noindent Blockchain is essentially a modern versional of a ledger. It is digital but also \textbf{decentralized}. We'll discuss the concept of decentralization more in depth but, at a high level what it means is that nobody owns or controls the ledger. In ancient times, ledgers were stored in temples, then banks in more modern times. Instead, the blockchain is stored on various computers referred to as a network.\\
 
+\noindent Blockchain is in fact not tied to Bitcoin. It was invented years before Bitcoin by Stuart Haber and W. Scott Stornetta who worked at Bell labs in 1991. Their motivation was to create a way of making digital documents immutable and tamper-proof. \\
 
+\noindent In technical terms, a blockchain is implemented as a distributed database. The database structures data into blocks and links them together, creating a chain of blocks. Each block contains a set of transactions and is assigned a hash. The hash is a combination of multiple details including sender, receiver, transactions etc.  but most importantly, the hash of the previous block. Each block contains the hash of the block before it. For example, Block 2 would have the hash of Block 1. This is important, because if someone tries to tamper with Block 1, it's hash would change but, Block 2 contains Block 1's hash which would also become invalid and a result, the hash of Block 2 would become invalid. If there are more blocks, Block 3, 4 and so on, al of theml become invalid. This is very powerful as it makes a blockhain highly tamper proof. Attempting to tamper one block, invalidates all the others. \\
 
 \section{Currency and Cryptocurrencies}{}
+What is a cryptocurrency? How does it have value if I can't see or feel it? A question many people commonly ask.\\
+
+
+\noindent Fundamentally, nowadays most currencies (digital or paper) have no value. It has value because society agreed that it will be used as a medium of exchange and a result, has value. It is a social construct. This is known as the Fiat Standard. It's worth pointing out that this wasn't always the case. Before 1971, the US dollar and many currencies around the world were backed gold, a physical asset. It was known as the Bretton Wood System or Agreement. However, in August 1971, President Richard Nixon broke this agreement in order to fight unemployment, inflation and stabilize the US dollar. The US dollar was no longer backed by gold and many other countries followed.\\
+
+
+\noindent Most Cryptocurrencies (including Bitcoin) are also technically fiat currencies. They are not backed by anything and they only have value because the people using agreed upon them as a medium of exchange. However, there are other factors that play a role in determining the value of a currency. We'll discuss these factors, specifically for Bitcoin in the next section. In addition, these currencies live on a Blockchain that is secured via cryptographic hash functions, which is where the name comes from. Cryptography + currency = Cryptocurrency\\
 
 \section{Bitcoin}{}
 \subsection{Overview}{}
+As we discussed earlier, Bitcoin is a cryptocurrency. It was introduced to world in the famous white paper titled \textbf{Bitcoin: A Peer-to-Peer Electronic Cash System} published by Satoshi Nakamoto on October 31, 2008, not long after the 2008 financial collapse. What Satoshi really wanted was: decentralized currency, one that was truly controlled by no bank or third party. Instant online transfers, and make all of that secure.
+
 \subsection{Price Factors}{}
 \subsection{Byzantine General's Problem and Consenus}{}
+It's worth pointing out that Bitcoin did not solve the problem of online money transfers or creating tamper proof ledgers, these were solved problems before Bitcoin came around. Bitcoin drew heavily on earlier works in cryptography and digital security (more on this later). What Satoshi really solved was the problem of Consensus. At a high level, the problem was: In a distributed system, how do different nodes agree on the state of the blockchain.
 \subsection{The Bitcoin Network and distributed Nodes}{}
 \subsection{Cryptography and security}{}
 \subsection{Public Adoption}{}
@@ -109,8 +122,41 @@ A blockchain is simply a ledger. It records transactions. It records the sender,
 \section{An Oracle for mining Bitcoin Blocks}{}
 
 \subsection{Functions as Unitary Matrices}{}
+We can represent a function as a Unitary Matrix. For example Suppose we have the Logical AND function. It's truth table is:
+
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ a & b & f = $a \land b$ \\ 
+ 0 & 0 & 0 \\ 
+ 0 & 1 & 0 \\ 
+ 1 & 0 & 0 \\ 
+ 1 & 1 & 1 \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+We can represent this as a matrix as follows:
+
+$
+\begin{bmatrix}
+00 & 01 & 10 & 11\\
+a & b & c & 4\\
+a & b & c & 4\\
+a & b & c & 4\\
+\end{bmatrix}
+$
+
 \subsection{Reversible Functions}{}
-\subsection{Pseudocode}{}
+There is one problem with the above matrix when trying to use it, it is not reversible. In order for it to be reversible, the matrix's \textbf{conjugate tranpose} must be equal to the original matrix, this is the definition of Unitary, $U*U^{+} = I$. Functions need to be reversible in Quantum Computing. Why? Landauer's principle proposes that \textbf{information is physical}. He proposed that fundamentally, logic gates dissipate heat because they \textbf{delete} information, and because information is physical and a form of energy, it must be conserved and hence it must go somewhere, and goes into the environment as heat. \\
+
+\noindent For example, a logical AND gate takes 2 inputs but produces only one output, we cannot recover the original bits, and so we lost or deleted information. This deleted information was released into the environment as heat. He proposed that the minimum amount of energy required to delete one bit of information was $K T$ ln (2), where K is the Boltzmann constant and T is the temperature of the system. It was derived from the Boltzmann Entropy Formula which states that $\frac{E}{T} = K ln(W)$ where $E$ is energy and $W$ is the number of states the system can be in. In the case of a bit, it can be in 2 states, 0 or 1 and so $W = 2$ and so we get $E = K T ln(2)$. For $N$ bits, we have $W = 2^{N}$ states which gives $E = K T ln(2^N)$ which is equivalent to $N K T ln (2)$ which shows that the energy dissipated by logic gates scales linearly with the number of bits.\\
+
+\noindent We can turn an arbitrary non reversible function $f(x)$ reversible by doing $U_{f} (x, h) = (x, h \oplus  f(x))$. In terms of a matrix representing a function, that can be achieved by doing $U_f |x> = (-1)^{f(x)}|x>$
+ \subsection{Pseudocode}{}
+\begin{verbatim} 
+
+\end{verbatim} 
 
 \section{Full Mining Implementation}{}
 
