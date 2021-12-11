@@ -22,6 +22,7 @@
 %   read geometry.pdf for detailed page layout information
 
 \usepackage{graphicx} % support the \includegraphics command and options
+\usepackage{physics}
 
 % \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 
@@ -82,7 +83,7 @@ In this paper we cover the basics of Bitcoin, Blockchain and Bitcoin's Proof-of-
 
 A blockchain is simply a ledger. It records transactions. It records the sender, receiver and the amount being sent by the sender to the receiver. It's a concept that has been around for thousands of years.\\
 
-\noindent In ancient times, in places like Babylon and Mesopotamia, people used clay tablets and carved details of transactions onto these tablets. Slowly these evolved into papyrus documents. In the 15h century, italian mathematician Luca Pacioli introduced the idea of double entry bookkeeping. It became the underlying principle of today's field of accounting. It's very simple, each transaction involves a credit entry for one party and a debit entry for another party.\\
+\noindent In ancient times, in places like Babylon and Mesopotamia, people used clay tablets and carved details of transactions onto these tablets. Slowly these evolved into papyrus documents. In the 1t5h century, italian mathematician Luca Pacioli introduced the idea of double entry bookkeeping. It became the underlying principle of today's field of accounting. It's very simple, each transaction involves a credit entry for one party and a debit entry for another party.\\
 
 \noindent Blockchain is essentially a modern versional of a ledger. It is digital but also \textbf{decentralized}. We'll discuss the concept of decentralization more in depth but, at a high level what it means is that nobody owns or controls the ledger. In ancient times, ledgers were stored in temples, then banks in more modern times. Instead, the blockchain is stored on various computers referred to as a network.\\
 
@@ -120,51 +121,83 @@ It's worth pointing out that Bitcoin did not solve the problem of online money t
 
 
 \section{Grover's Algorithm}{}
+Grover's Algorithm is a quantum search algorithm. It can search an unsorted list of items in $O(\sqrt{N})$ evaluations of the oracle function. It uses a technique called amplitude amplification that repeatedly applies the algorithm and with each iteration, our target result has a higher and higher probability. Essentially, we are amplifying results of interest.\\
 
+\noindent Suppose we have $N = 2^{n}$ possible states, where $n$ is the number of bits. We start by defining a Unitary matrix $U_w$. Then we do the following:
+
+\begin{itemize}
+
+\item[1)] Initialize the system to the uniform superposition over all states:\\
+
+$ \ket{s} = \frac{1}{\sqrt{N}}  \sum_{x = 0}^{N - 1} \ket{x}$
+
+\item[2)] Perform the following $k$ times ($k$ is about $\frac{\pi}{4} \sqrt{N)}$:
+
+\begin{itemize}
+\item[1)] Apply the operator $U_w$
+\item[2)] Apply the Grover diffusion operator $U_s = 2 \ket{s} \bra{s} - I$
+\end{itemize}
+\item[3)] Measure results
+\end{itemize}
+
+The circuit looks as follows:\\
+
+\noindent \includegraphics[keepaspectratio, width=15cm, height=15cm]{grover-circuit}
 
 \section{An Oracle for mining Bitcoin Blocks}{}
 
 \subsection{Functions as Unitary Matrices}{}
-We can represent a function as a Unitary Matrix. For example Suppose we have the Logical AND function. It's truth table is:
+We can represent a function as a Unitary Matrix. For example, suppose we have a reverse function that reverses the input bits.
 
 \begin{center}
 \begin{tabular}{ |c|c|c| } 
  \hline
- a & b & f = $a \land b$ \\ 
- 0 & 0 & 0 \\ 
- 0 & 1 & 0 \\ 
- 1 & 0 & 0 \\ 
- 1 & 1 & 1 \\ 
+ a & b & f = $ba$ \\ 
+ 0 & 0 & 00 \\ 
+ 0 & 1 & 10 \\ 
+ 1 & 0 & 01 \\ 
+ 1 & 1 & 11 \\ 
  \hline
 \end{tabular}
 \end{center}
 
-We can represent this as a matrix as follows:
+We can represent this as a matrix as follows:\\
 
 $
 \begin{bmatrix}
-00 & 01 & 10 & 11\\
-a & b & c & 4\\
-a & b & c & 4\\
-a & b & c & 4\\
+& 00 & 01 & 10 & 11\\
+00 &1 & 0 & 0 & 0\\
+01 & 0 & 0 & 1 & 0\\
+10 & 0& 1 & 0 & 0\\
+11& 0& 0 & 0 & 1\\
 \end{bmatrix}
-$
+$\\
+
+\noindent The first row and column are simply labels. The way to interpret this is: 1 marks the answer. So you look at the column for a particular input, say 10 and then look for the row where there's a 1, the row number is the answer. For example, if we look at column 10, there is a 1 at row 01, meaning $f(10) = 01$
+
+\subsection{Reversible Computing}{}
+\noindent Quantum computation needs to be reversible. This means that for a given input, a circuit produces some output but, unlike classical computers, we should be able to recover the input from the output. Why is this a requirement?\\
+
+\noindent Rolf Landauer proposed the Landauer principle, which proposes that \textbf{information is physical}. He proposed that fundamentally, logic gates dissipate heat because they are irreversible. Since they are irreversible, they \textbf{delete} information. He proposed that deleting a single bit of information increases a systems entropy and the associated energy is released as heat.\\
+
+\noindent For example, a logical AND gate takes 2 inputs but produces only one output, we cannot recover the original bits, and so we lost or deleted information.  We can think of the information as being conserved, it can't be created or destroyed and so must go somewhere, and it dissipates away as heat.\\
+
+\noindent Landauer proposed that the minimum amount of energy required to delete one bit of information was $K T$ ln (2), where K is the Boltzmann constant and T is the temperature of the system. It was derived from the Boltzmann Entropy Formula which states that $\frac{E}{T} = K ln(W)$ where $E$ is energy and $W$ is the number of states the system can be in. In the case of a bit, it can be in 2 states, 0 or 1 and so $W = 2$ and so we get $E = K T ln(2)$. For $N$ bits, we have $W = 2^{N}$ states which gives $E = K T ln(2^N)$ which is equivalent to $N K T ln (2)$ which shows that the energy dissipated by logic gates scales linearly with the number of bits.\\
 
 \subsection{Reversible Functions}{}
-There is one problem with the above matrix when trying to use it, it is not reversible. In order for it to be reversible, the matrix's \textbf{conjugate tranpose} must be equal to the original matrix, this is the definition of Unitary, $U*U^{+} = I$. Functions need to be reversible in Quantum Computing. Why? Landauer's principle proposes that \textbf{information is physical}. He proposed that fundamentally, logic gates dissipate heat because they \textbf{delete} information, and because information is physical and a form of energy, it must be conserved and hence it must go somewhere, and goes into the environment as heat. \\
 
-\noindent For example, a logical AND gate takes 2 inputs but produces only one output, we cannot recover the original bits, and so we lost or deleted information. This deleted information was released into the environment as heat. He proposed that the minimum amount of energy required to delete one bit of information was $K T$ ln (2), where K is the Boltzmann constant and T is the temperature of the system. It was derived from the Boltzmann Entropy Formula which states that $\frac{E}{T} = K ln(W)$ where $E$ is energy and $W$ is the number of states the system can be in. In the case of a bit, it can be in 2 states, 0 or 1 and so $W = 2$ and so we get $E = K T ln(2)$. For $N$ bits, we have $W = 2^{N}$ states which gives $E = K T ln(2^N)$ which is equivalent to $N K T ln (2)$ which shows that the energy dissipated by logic gates scales linearly with the number of bits.\\
 
-\noindent We can turn an arbitrary non reversible function $f(x)$ reversible by doing $U_{f} (x, h) = (x, h \oplus  f(x))$. \\
+\noindent We can turn an arbitrary non reversible function $f(x)$, into a reversible function by doing $U_{f} (x, h) = (x, h \oplus  f(x))$. \\
 
-\noindent In terms of a matrix representing a function, that can be achieved by doing $U_f |x> = (-1)^{f(x)}|x>$
+\noindent In terms of a matrix representing a function, we can ensure it is reversible by satisfying $U_f \ket{x} = (-1)^{f(x)} \ket{x}$\\
 
+\noindent This means our diagonal contains -1 or 1. $f(x) = 0$ when $x$ is not a solution and $f(x) = 1$ when $x$ is a solution.
 
  \subsection{Pseudocode}{}
 We can use the following Python pseudocode to achieve the above.
 \begin{Verbatim}[tabsize=4]
 def f(x):	
-	if f(x) is a solution:
+	if x is a valid nonce:
 		return 1
 	return 0
 
@@ -175,9 +208,7 @@ def functionToMatrix(fn, n):
 	size = 2**n
 	matrix = []
 	for i in range(size):
-		for j in range(size):
-			if (j == i):
-				matrix[i][j] = fn(j)
+		matrix[i][i] = fn(i)
 	return matrix
 	
 \end{Verbatim} 
