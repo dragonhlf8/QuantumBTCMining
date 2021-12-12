@@ -118,7 +118,7 @@ What factors determine the price of Bitcoin? Why does it fluctuate? We can break
 \end{itemize}
 
 \subsubsection{Supply}{}
-A scarce resource, generally has value. For example, Gold. Gold is limited in supply and is difficult to mine. Bitcoin is also limited in supply and is difficult to produce. There is a max number that can ever be mined, which is 21 million. New Bitcoin's are released into circulation by mining. However, over time the mining difficulty increases and the reward decreases. The reward is halved when 210,000 new blocks are added to the blockchain, which occurs roughly every 4 years. For example, on May 2020, the reward decreased from 12.5 BTC to 6.25 BTC. As the reward decreases, new Bitcoin's are released into circulation at a slower rate, this limited supply drives the value up. In fact, it has been observed that the price of Bitcoin hits new record prices roughly 1.5 years after a halving event [1].
+A scarce resource, generally has value. For example, Gold. Gold is limited in supply and is difficult to mine. Bitcoin is also limited in supply and is difficult to produce. There is a max number that can ever be mined, which is 21 million. New Bitcoin's are released into circulation by mining. However, over time the mining difficulty increases and the reward decreases. The reward is halved when 210,000 new blocks are added to the blockchain, which occurs roughly every 4 years. For example, on May 2020, the reward decreased from 12.5 BTC to 6.25 BTC. As the reward decreases, new Bitcoin's are released into circulation at a slower rate, this limited supply drives the value up. In fact, it has been observed that the price of Bitcoin hits new record prices roughly 1.5 years after a halving event \cite{18}.
 
 \subsubsection{Demand}{}
 The demand is mainly a function of adoption. A currency has more value when it is more widely adopted as a medium of exchange. As it becomes more mainstream, more people will demand it and with the limited supply, the price further goes up. As more countries adopt and accept Bitcoin as a legal tender, its value will increase.
@@ -127,7 +127,7 @@ The demand is mainly a function of adoption. A currency has more value when it i
 When people have choice, they can pick. This is true for goods and also true for currencies. As more and more cryptocurrencies enter the market, the competition against Bitcoin continues to increase. For example, Ethereum is another very popular cryptocurrency. Many cryptocurrencies have different underlying protocols, design decisions, lower transactions fees, all these factors play a role in competing against Bitcoin. As more options become available, the demand would go down for Bitcoin and a result, the price would also decrease.
 
 \subsubsection{Regulatory and News Development}{}
-News surrounding the cryptocurrency space and Bitcoin plays a big role in the price. Most of the news has to do with regulatory and adoption developments. For example, when a country decides to adopt Bitcoin or when a country decided to ban it. Positive news increases the price and negative news decreases the price. For example, when the Securities Exchange Commission (SEC) announced crypto exchanges must register with an agency, the Bitcoin price dropped [6]. Or, when El Salvador decided to make Bitcoin a legal tender and bought several Bitcoins themselves, the price rose [5].
+News surrounding the cryptocurrency space and Bitcoin plays a big role in the price. Most of the news has to do with regulatory and adoption developments. For example, when a country decides to adopt Bitcoin or when a country decided to ban it. Positive news increases the price and negative news decreases the price. For example, when the Securities Exchange Commission (SEC) announced crypto exchanges must register with an agency, the Bitcoin price dropped \cite{6}. Or, when El Salvador decided to make Bitcoin a legal tender and bought several Bitcoins themselves, the price rose \cite{5}.
 
 \subsection{What does Bitcoin solve?}{}
 It's worth pointing out that Bitcoin did not solve the problem of online money transfers or creating tamper proof ledgers, these were solved problems before Bitcoin came around. Bitcoin drew heavily on earlier works such as Proof-of-Work and Blockchain technology. What Satoshi really solved was the double spending problem. He proposed a solution to this using a protocol known as \textbf{Proof-of-Work}. We will dive into more details about this, but, at a high level it involves a distributed network and each computer in the network must use CPU power to find a number (known as nonce) that produces a hash with a target number of leading zeros.
@@ -135,10 +135,11 @@ It's worth pointing out that Bitcoin did not solve the problem of online money t
 What does distributed mean? What is a node? If you are familiar with Distributed Computation it will be easier to understand. However, if you are not, we'll attempt to explain it as best as possible. \\
 
 \noindent A network is a set of computers. Each computer is called a node. These nodes can be in the same room or on completely opposite sides of the globe, this is the distributed part. So we have a set of computers all around the world, each has a copy of the blockchain. Each node also participates in the network by verifying transactions. Transactions are verified by solving the cryptographic hash puzzle and finding the nonce.
+
 \subsection{Cryptography and Security}{}
 Bitcoin uses the SHA-256 hashing algorithm. Each block is assigned a hash, it also stores the hash of the block before it. If any data in a block is changed, say the sender, receiver or a transaction, the hash is no longer valid and that block is also no longer valid and needs to be re-mined. Since other blocks also store the previous blocks hash, when a block is tampered with, all blocks after it are also invalidated because the previous blocks hash is invalid. This makes it very difficult to tamper with the blockchain, as one would have to re-mine multiple blocks, each of which requires immense computational effort.\\
 
-\noindent Bitcoin also requires multiple confirmations per block. So let's say one node finds the nonce for a block, it requires atleast 6 other nodes to confirm the block [11]. This introduces additional security.\\
+\noindent Bitcoin also requires multiple confirmations per block. So let's say one node finds the nonce for a block, it requires atleast 6 other nodes to confirm the block \cite{11}. This introduces additional security.\\
 
 \noindent In the official Bitcoin whitepaper, the probability of an attacker succeeding is modelled as follows:\\
 
@@ -154,7 +155,7 @@ Bitcoin is yet to be widely adopted as a form of payment. However, it is slowly 
 
 \section{Proof-of-Work and Mining}{}
 \subsection{A brief history of Proof of Work}
-Satoshi did not actually create Proof of Work. It was introduced by Adam Back in 1997 as a means of fighting email spam and Denial of Service Attacks (DoS) in web services [7]. The basic idea was that, before sending an email, the user's machine would have to do a small amount of computational work, say finding a number that produce a target hash and only then the email would be sent. In case of a spammer, for sending out mass emails, all that added computational work would not be possible for a single machine. Similar idea for preventing DoS attacks.
+Satoshi did not actually create Proof of Work. It was introduced by Adam Back in 1997 as a means of fighting email spam and Denial of Service Attacks (DoS) in web services \cite{7}. The basic idea was that, before sending an email, the user's machine would have to do a small amount of computational work, say finding a number that produce a target hash and only then the email would be sent. In case of a spammer, for sending out mass emails, all that added computational work would not be possible for a single machine. Similar idea for preventing DoS attacks.
 
 \subsection{Overview}
 
@@ -162,12 +163,12 @@ When a transaction occurs, it is not verified in real time, there is some delay.
 
 
 \subsection{Mining Technology}
-GPU's are a popular choice, thousands of these are clustered together to make mining rigs. ASIC's are also very popular, these are chips designed for the sole purpose of mining. Generally, buyers look for the best hash rate. Hash rate is the number of hashes that can be tried to find a nonce, per second. Nowadays, many ASIC's have hash rates above 1 TH/s [8], that is over a trillion hashes per second!
+GPU's are a popular choice, thousands of these are clustered together to make mining rigs. ASIC's are also very popular, these are chips designed for the sole purpose of mining. Generally, buyers look for the best hash rate. Hash rate is the number of hashes that can be tried to find a nonce, per second. Nowadays, many ASIC's have hash rates above 1 TH/s \cite{8}, that is over a trillion hashes per second!
 \subsection{Mining Difficulty}
-Formally, the mining difficulty is defined using an equation. The specifics aren't that important but, essentially the difficulty depends on the required number of leading zeros. With each added zero, the difficulty increases exponentially [1].  The difficulty is adjused after every 2,016 blocks are added, which is roughly every 2 weeks. Bitcoin aims to add a new block to the blockchain roughly every 10 minutes, which is about 900 blocks per day. The mining difficulty is adjusted to maintain this rate [12].
+Formally, the mining difficulty is defined using an equation. The specifics aren't that important but, essentially the difficulty depends on the required number of leading zeros. With each added zero, the difficulty increases exponentially \cite{1}.  The difficulty is adjused after every 2,016 blocks are added, which is roughly every 2 weeks. Bitcoin aims to add a new block to the blockchain roughly every 10 minutes, which is about 900 blocks per day. The mining difficulty is adjusted to maintain this rate \cite{12}.
 
 \subsection{Environmental Impact of Mining}{}
-Bitcoin mining requires immense computational resources. Many miners use GPU's and ASIC's to facilitate in mining. The mining difficulity has also increased millions of fold over time, which means more computational resources are required. For this reason, there are now mining pools, essentially groups of people that come together, combine their resources and share their reward, since the probability of succeeding individually is very low. There are mining rigs, which can be though of as data centers dedicated to mining bitcoin. This all means a large amount of electricty is consumed and lots of cooling is also required to keep the mining hardware cool. Some estimates have shown that Bitcoin mining consumes about 91 terrawatt-hours of electricity annually, which is more that what some countries consume [10]. For example, all of Finland consumes less electricity than Bitcoin.
+Bitcoin mining requires immense computational resources. Many miners use GPU's and ASIC's to facilitate in mining. The mining difficulity has also increased millions of fold over time, which means more computational resources are required. For this reason, there are now mining pools, essentially groups of people that come together, combine their resources and share their reward, since the probability of succeeding individually is very low. There are mining rigs, which can be though of as data centers dedicated to mining bitcoin. This all means a large amount of electricty is consumed and lots of cooling is also required to keep the mining hardware cool. Some estimates have shown that Bitcoin mining consumes about 91 terrawatt-hours of electricity annually, which is more that what some countries consume \cite{10}. For example, all of Finland consumes less electricity than Bitcoin.
 
 \section{An Oracle for mining Bitcoin Blocks}{}
 
@@ -207,7 +208,7 @@ $\\
 
 \noindent For example, a logical AND gate takes 2 inputs but produces only one output, we cannot recover the original bits, and so we lost or deleted information.  We can think of the information as being conserved, it can't be created or destroyed and so must go somewhere, and it dissipates away as heat.\\
 
-\noindent Landauer proposed that the minimum amount of energy required to delete one bit of information was $K T$ ln (2), where K is the Boltzmann constant and T is the temperature of the system. It was derived from the Boltzmann Entropy Formula which states that $\frac{E}{T} = K ln(W)$ where $E$ is energy and $W$ is the number of states the system can be in. In the case of a bit, it can be in 2 states, 0 or 1 and so $W = 2$ and so we get $E = K T ln(2)$. For $N$ bits, we have $W = 2^{N}$ states which gives $E = K T ln(2^N)$ which is equivalent to $N K T ln (2)$ which shows that the energy dissipated by logic gates scales linearly with the number of bits.\\
+\noindent Landauer proposed that the minimum amount of energy required to delete one bit of information was $K T$ ln (2), where K is the Boltzmann constant and T is the temperature of the system \cite{19}. It was derived from the Boltzmann Entropy Formula which states that $\frac{E}{T} = K ln(W)$ where $E$ is energy and $W$ is the number of states the system can be in. In the case of a bit, it can be in 2 states, 0 or 1 and so $W = 2$ and so we get $E = K T ln(2)$. For $N$ bits, we have $W = 2^{N}$ states which gives $E = K T ln(2^N)$ which is equivalent to $N K T ln (2)$ which shows that the energy dissipated by logic gates scales linearly with the number of bits.\\
 
 \subsection{Reversible Functions}{}
 
@@ -239,7 +240,7 @@ def functionToMatrix(fn, n):
 \end{Verbatim} 
 
 \section{Grover's Algorithm}{}
-Grover's Algorithm is a quantum search algorithm. It can search an unsorted list of items in $O(\sqrt{N})$ evaluations of the oracle function, where $ N = 2^{n}$ possible states, where $n$ is the number of bits. It uses a technique called amplitude amplification that repeatedly applies the algorithm and with each iteration, our target result has a higher and higher probability of being the measured result [4]. Essentially, we are amplifying results of interest.\\
+Grover's Algorithm is a quantum search algorithm. It can search an unsorted list of items in $O(\sqrt{N})$ evaluations of the oracle function, where $ N = 2^{n}$ possible states, where $n$ is the number of bits. It uses a technique called amplitude amplification that repeatedly applies the algorithm and with each iteration, our target result has a higher and higher probability of being the measured result \cite{4}. Essentially, we are amplifying results of interest.\\
 
 \noindent We start by defining a Unitary matrix $U_w$. Then we do the following:
 
@@ -315,7 +316,7 @@ We are limited when finding a nonce as it may not fit in $n$ bits. We have to kn
 
 \noindent We haven't dug deeply into Qiskit internals but, it may be possible to encode only the values on the diagonal of the matrix and then pass it to Qiskit's \lstinline{g.unitary()}. This way, our space complexity would be $O(2^n)$ which is still quite large, but a significant improvement.
 
-\begin{thebibliography}{12}
+\begin{thebibliography}{19}
 \bibitem{1}
 \url{https://bitcoin.org/bitcoin.pdf}
 
@@ -338,6 +339,8 @@ egypt-to-blockchain-dag-and-beyond-47924175cb97}
 \bibitem{15} \url{https://github.com/codebasics/cool_python_apps/blob/main/2_bitcoin_mining/bitcoin_mining.py}
 \bibitem{16} \url{https://www.youtube.com/watch?v=5auv_xrvoJk}
 \bibitem{17} \url{https://www.investopedia.com/terms/n/nixon-shock.asp}
+\bibitem{18} \url{https://www.investopedia.com/bitcoin-halving-4843769}
+\bibitem{19} \url{https://en.wikipedia.org/wiki/Landauer%27s_principle}
 \end{thebibliography}
 
 
