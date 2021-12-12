@@ -98,7 +98,7 @@ A blockchain is simply a ledger. It records transactions. It records the sender,
 What is a cryptocurrency? How does it have value if I can't see or feel it? A question many people commonly ask.\\
 
 
-\noindent Fundamentally, nowadays most currencies (digital or paper) have no value. It has value because society agreed that it will be used as a medium of exchange and a result, has value. It is a social construct. This is known as the Fiat Standard. It's worth pointing out that this wasn't always the case. Before 1971, the US dollar and many currencies around the world were backed gold, a physical asset. It was known as the Bretton Wood System or Agreement. However, in August 1971, President Richard Nixon broke this agreement in order to fight unemployment, inflation and stabilize the US dollar. The US dollar was no longer backed by gold and many other countries followed.\\
+\noindent Fundamentally, nowadays most currencies (digital or paper) have no value. It has value because society agreed that it will be used as a medium of exchange and a result, has value. It is a social construct. This is known as the Fiat Standard. It's worth pointing out that this wasn't always the case. Before 1971, the US dollar and many currencies around the world were backed gold, a physical asset. It was known as the Bretton Wood System or Agreement. However, in August 1971, President Richard Nixon broke this agreement in order to fight unemployment, inflation and stabilize the US dollar \cite{17}. The US dollar was no longer backed by gold and many other countries followed.\\
 
 
 \noindent Most Cryptocurrencies (including Bitcoin) are also technically fiat currencies. They are not backed by anything and they only have value because the people using it agreed upon them as a medium of exchange. However, there are other factors that play a role in determining the value of a currency. We'll discuss these factors, specifically for Bitcoin in the next section. In addition, these currencies live on a Blockchain that is secured via cryptographic hash functions, which is where the name comes from. Cryptography + currency = Cryptocurrency\\
@@ -315,8 +315,6 @@ We are limited when finding a nonce as it may not fit in $n$ bits. We have to kn
 
 \noindent We haven't dug deeply into Qiskit internals but, it may be possible to encode only the values on the diagonal of the matrix and then pass it to Qiskit's \lstinline{g.unitary()}. This way, our space complexity would be $O(2^n)$ which is still quite large, but a significant improvement.
 
-\section{References}{}
-
 \begin{thebibliography}{12}
 \bibitem{1}
 \url{https://bitcoin.org/bitcoin.pdf}
@@ -335,7 +333,11 @@ egypt-to-blockchain-dag-and-beyond-47924175cb97}
 \bibitem{10} \url{https://www.nytimes.com/interactive/2021/09/03/climate/bitcoin-carbon-footprint-electricity.html}
 \bibitem{11} \url{https://bitcoin.org/en vocabulary#:~:text=Transactions%20receive%20a%20confirmation%20when,for%206%20confirmations%20or%20more.}
 \bibitem{12} \url{https://en.bitcoin.it/wiki/Difficulty}
-
+\bibitem{13} \url{https://www.investopedia.com/tech/how-does-bitcoin-mining-work/}
+\bibitem{14} \url{https://bitcoin.stackexchange.com/questions/5838/how-is-difficulty-calculated}
+\bibitem{15} \url{https://github.com/codebasics/cool_python_apps/blob/main/2_bitcoin_mining/bitcoin_mining.py}
+\bibitem{16} \url{https://www.youtube.com/watch?v=5auv_xrvoJk}
+\bibitem{17} \url{https://www.investopedia.com/terms/n/nixon-shock.asp}
 \end{thebibliography}
 
 
