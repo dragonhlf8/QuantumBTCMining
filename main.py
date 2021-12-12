@@ -1,4 +1,3 @@
-from logging import error
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 from bitcoin import BTC_mining_oracle
 from grover import diffuser

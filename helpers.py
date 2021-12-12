@@ -40,8 +40,8 @@ def phase(x):
 '''
 def f(x):
     nonce = x
-    new_hash = SHA256(block_header, nonce)
-    if (new_hash.startswith(prefix)):
+    hash = SHA256(block_header, nonce)
+    if (hash.startswith(prefix)):
         return 1
     return 0
 
