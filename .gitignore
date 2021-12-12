@@ -130,6 +130,7 @@ dmypy.json
 
 # Latex
 *.aux
-*.synctex
+*.synctex.gz
 *.log
 *.toc
+*.out
